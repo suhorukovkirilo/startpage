@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #2b2a33;
+            color: #fbfbfe;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .time-date {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #time { font-size: 3rem; font-weight: 300; }
+        #date { font-size: 1.1rem; color: #b1a7c7; margin-top: 5px; }
+        
+        .search-form {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #52525e;
+            background-color: #383842;
+            color: #fff;
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: 0.2s;
+        }
+        .search-input:focus {
+            border-color: #00ddff;
+            box-shadow: 0 0 0 2px rgba(0, 221, 255, 0.3);
+        }
+        .shortcuts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .shortcut-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #fbfbfe;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .shortcut-card:hover { background-color: #42414d; }
+        .icon {
+            width: 48px;
+            height: 48px;
+            background-color: #383842;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .label { font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Time and Date -->
+    <div class="time-date">
+        <div id="time">00:00</div>
+        <div id="date">Loading date...</div>
+    </div>
+
+    <!-- 2. Search Box (Redirects to Google) -->
+    <form class="search-form" action="https://www.google.com/search" method="GET">
+        <input type="text" name="q" class="search-input" placeholder="Search with Google..." autofocus required>
+    </form>
+
+    <!-- 3. Shortcut Links -->
+    <div class="shortcuts">
+        <a href="https://youtube.com" class="shortcut-card">
+            <div class="icon">YT</div>
+            <span class="label">YouTube</span>
+        </a>
+        <a href="https://github.com" class="shortcut-card">
+            <div class="icon">GH</div>
+            <span class="label">GitHub</span>
+        </a>
+        <a href="https://reddit.com" class="shortcut-card">
+            <div class="icon">RD</div>
+            <span class="label">Reddit</span>
+        </a>
+        <a href="https://wikipedia.org" class="shortcut-card">
+            <div class="icon">WP</div>
+            <span class="label">Wikipedia</span>
+        </a>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('time').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('date').textContent = now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' });
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
